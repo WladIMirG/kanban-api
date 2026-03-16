@@ -1,6 +1,9 @@
 #!/bin/bash
 
 BASE="http://localhost:3000/api"
+BASE="http://localhost:3000/api"
+TIMESTAMP=$(date +%s)
+TEST_EMAIL="script_${TIMESTAMP}@teste.com"
 PASS=0
 FAIL=0
 
@@ -31,7 +34,7 @@ echo "--- Usuários ---"
 
 RESULT=$(curl -s -X POST $BASE/users \
   -H "Content-Type: application/json" \
-  -d '{"name":"Teste Script","email":"script@teste.com","phone":"11900000000"}')
+  -d "{\"name\":\"Teste Script\",\"email\":\"${TEST_EMAIL}\",\"phone\":\"11900000000\"}")
 check "Criar usuário válido" '"id"' "$RESULT"
 
 RESULT=$(curl -s -X POST $BASE/users \
@@ -41,7 +44,7 @@ check "Rejeitar usuário inválido (400)" '"errors"' "$RESULT"
 
 RESULT=$(curl -s -X POST $BASE/users \
   -H "Content-Type: application/json" \
-  -d '{"name":"Duplicado","email":"script@teste.com","phone":"11900000000"}')
+  -d "{\"name\":\"Duplicado\",\"email\":\"${TEST_EMAIL}\",\"phone\":\"11900000000\"}")
 check "Rejeitar email duplicado (409)" '"error"' "$RESULT"
 
 RESULT=$(curl -s $BASE/users)
