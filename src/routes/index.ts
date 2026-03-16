@@ -2,7 +2,7 @@ import { Router } from "express";
 import { createUser, listUsers } from "../controllers/userController";
 import { createBoard, listBoards, getBoardById } from "../controllers/boardController";
 import { createColumn, listColumnsByBoard } from "../controllers/columnController"; 
-import { createCard } from "../controllers/cardController";
+import { createCard, moveCard } from "../controllers/cardController";
 
 const router = Router();
 
@@ -21,5 +21,6 @@ router.get("/boards/:boardId/columns", listColumnsByBoard);
 
 // Cards
 router.post("/cards", createCard);
+router.patch("/cards/:id/move", moveCard);
 
 export default router;
