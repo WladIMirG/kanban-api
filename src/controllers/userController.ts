@@ -19,7 +19,8 @@ export function createUser(req: Request, res: Response): void {
 
   const { name, email, phone } = parsed.data;
   const db = getDatabase();
-
+  
+  // Check if email already exists
   const existing = db.exec(
     `SELECT id FROM users WHERE email = '${email.replace(/'/g, "''")}'`
   );
