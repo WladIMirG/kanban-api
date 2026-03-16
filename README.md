@@ -38,6 +38,55 @@ O servidor inicia em `http://localhost:3000`. O banco de dados é criado automat
 
 ---
 
+## Exemplos de uso
+
+### Criar usuário
+```bash
+curl -X POST http://localhost:3000/api/users \
+  -H "Content-Type: application/json" \
+  -d '{"name":"João Silva","email":"joao@email.com","phone":"11999999999"}'
+```
+
+### Listar usuários
+```bash
+curl http://localhost:3000/api/users
+```
+
+### Criar quadro
+```bash
+curl -X POST http://localhost:3000/api/boards \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Meu Projeto"}'
+```
+
+### Criar coluna
+```bash
+curl -X POST http://localhost:3000/api/columns \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Em Espera","board_id":1}'
+```
+
+### Criar card
+```bash
+curl -X POST http://localhost:3000/api/cards \
+  -H "Content-Type: application/json" \
+  -d '{"title":"Minha tarefa","description":"Detalhes","author_id":1,"column_id":1}'
+```
+
+### Mover card para outra coluna
+```bash
+curl -X PATCH http://localhost:3000/api/cards/1/move \
+  -H "Content-Type: application/json" \
+  -d '{"target_column_id":2}'
+```
+
+### Ver quadro completo (colunas + cards)
+```bash
+curl http://localhost:3000/api/boards/1 | jq
+```
+
+---
+
 ## Processo de Pensamento
 
 ### Estrutura do projeto
