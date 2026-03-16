@@ -156,15 +156,22 @@ Só após todas as verificações o `UPDATE` é executado.
 
 ## Uso de Inteligência Artificial
 
-Utilizei o **Claude (Anthropic)** como ferramenta de apoio, da mesma forma que usaria documentação, Stack Overflow ou pair programming.
+Utilizei o **Claude (Anthropic)** como ferramenta de apoio, tanto via browser quanto integrado ao VSCode, da mesma forma que usaria documentação, Stack Overflow ou pair programming.
 
 **Para quê usei:**
 - Acelerar o scaffolding inicial do projeto
 - Apoio na escrita de queries SQL com agregações e joins
 - Resolução pontual de erros de tipagem do TypeScript
+- Escrita do README e documentação do projeto
+- Apoio no autocompletar de alguns trechos de código
 
 **O que não deleguei à IA:**
 - Decisões de arquitetura — routes → controllers foi uma escolha consciente
 - A lógica e a ordem das validações do endpoint de mover card
 - A escolha do sql.js em detrimento do better-sqlite3 e o motivo
 - A estrutura do seed e os dados de exemplo
+
+**Como validei tudo:**
+- Rodei `npx tsc --noEmit` para garantir correção de tipos
+- Testei todos os endpoints manualmente via `curl` e com o `test.sh`
+- Li e entendi cada arquivo antes de usar
