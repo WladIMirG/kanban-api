@@ -1,6 +1,7 @@
 import initSqlJs, { Database } from "sql.js";
 import fs from "fs";
 import path from "path";
+import { runSeed } from "./seed";
 
 const DB_PATH = path.resolve("kanban.db");
 
@@ -17,6 +18,7 @@ export async function initDatabase(): Promise<Database> {
   }
 
   runMigrations(db);
+  runSeed(db);
   saveDatabase(db);
 
   return db;
