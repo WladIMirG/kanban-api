@@ -29,3 +29,20 @@ export function createBoard(req: Request, res: Response): void {
 
   res.status(201).json({ id: row[0], name: row[1] });
 }
+
+export function listBoards(_req: Request, res: Response): void {
+  const db = getDatabase();
+  const result = db.exec(`SELECT id, name FROM boards`);
+
+  if (result.length === 0) {
+    res.json([]);
+    return;
+  }
+
+  const boards = result[0]!.values.map((row: SqlValue[]) => ({
+    id: row[0],
+    name: row[1],
+  }));
+
+  res.json(boards);
+}
