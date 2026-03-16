@@ -14,10 +14,10 @@ router.get("/users", listUsers);
 router.post("/boards", createBoard);
 router.get("/boards", listBoards);
 router.get("/boards/:id", getBoardById);
+router.get("/boards/:boardId/columns", listColumnsByBoard);
 
 // Columns
 router.post("/columns", createColumn);
-router.get("/boards/:boardId/columns", listColumnsByBoard);
 
 // Cards
 router.post("/cards", createCard);
