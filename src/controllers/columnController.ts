@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { z } from "zod";
 import { getDatabase, saveDatabase } from "../db/database";
+import { SqlValue } from "sql.js";
 
 const createColumnSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -55,4 +56,37 @@ export function createColumn(req: Request, res: Response): void {
     position: row[2],
     board_id: row[3],
   });
+}
+
+export function listColumnsByBoard(req: Request, res: Response): void {
+  const { boardId } = req.params;
+  const db = getDatabase();
+
+  const boardResult = db.exec(
+    `SELECT id FROM boards WHERE id = ${Number(boardId)}`
+  );
+  if (boardResult.length === 0 || boardResult[0]!.values.length === 0) {
+    res.status(404).json({ error: "Board not found" });
+    return;
+  }
+
+  const result = db.exec(
+    `SELECT id, name, position, board_id FROM columns 
+     WHERE board_id = ${Number(boardId)} 
+     ORDER BY position ASC`
+  );
+
+  if (result.length === 0) {
+    res.json([]);
+    return;
+  }
+
+  const columns = result[0]!.values.map((row: SqlValue[]) => ({
+    id: row[0],
+    name: row[1],
+    position: row[2],
+    board_id: row[3],
+  }));
+
+  res.json(columns);
 }

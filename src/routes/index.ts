@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { createUser, listUsers } from "../controllers/userController";
 import { createBoard, listBoards, getBoardById } from "../controllers/boardController";
-import { createColumn } from "../controllers/columnController"; 
+import { createColumn, listColumnsByBoard } from "../controllers/columnController"; 
 
 const router = Router();
 
@@ -16,5 +16,6 @@ router.get("/boards/:id", getBoardById);
 
 // Columns
 router.post("/columns", createColumn);
+router.get("/boards/:boardId/columns", listColumnsByBoard);
 
 export default router;
