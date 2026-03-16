@@ -17,8 +17,10 @@ cd kanban-api
 npm install
 npm run dev
 ```
-
 O servidor inicia em `http://localhost:3000`. O banco de dados é criado automaticamente na primeira execução.
+
+> **Nota:** O banco de dados é criado automaticamente na primeira execução e populado com dados de exemplo — 10 usuários, 1 quadro, 5 colunas e 10 cards distribuídos pelo quadro. Encontrase no [src/db/seed.ts](src/db/seed.ts)
+
 
 ---
 
