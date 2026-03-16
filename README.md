@@ -87,6 +87,21 @@ curl http://localhost:3000/api/boards/1 | jq
 
 ---
 
+## Executar os testes
+
+Com o servidor rodando (`npm run dev`), abre outro terminal e executa:
+```bash
+chmod +x test.sh
+./test.sh
+```
+
+O script testa todos os endpoints e cenários de erro, incluindo a regra principal de negócio — mover um card para uma coluna de outro quadro. O resultado esperado é:
+```
+✅ Passou: 16  |  ❌ Falhou: 0
+```
+
+---
+
 ## Processo de Pensamento
 
 ### Estrutura do projeto
@@ -105,7 +120,7 @@ src/
 └── index.ts              # entrada da aplicação
 ```
 
-Optei pela arquitectura mais simples possível — **routes → controllers** — sem camada de serviços. O domínio é pequeno o suficiente para que uma camada extra fosse apenas burocracia.
+Optei pela arquitetura mais simples possível — **routes → controllers** — sem camada de serviços. O domínio é pequeno o suficiente para que uma camada extra fosse apenas burocracia.
 
 ### Acesso a dados
 
@@ -149,7 +164,7 @@ Utilizei o **Claude (Anthropic)** como ferramenta de apoio, da mesma forma que u
 - Resolução pontual de erros de tipagem do TypeScript
 
 **O que não deleguei à IA:**
-- Decisões de arquitectura — routes → controllers foi uma escolha consciente
+- Decisões de arquitetura — routes → controllers foi uma escolha consciente
 - A lógica e a ordem das validações do endpoint de mover card
 - A escolha do sql.js em detrimento do better-sqlite3 e o motivo
 - A estrutura do seed e os dados de exemplo
