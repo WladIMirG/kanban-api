@@ -25,7 +25,7 @@ export function createUser(req: Request, res: Response): void {
     `SELECT id FROM users WHERE email = '${email.replace(/'/g, "''")}'`
   );
   if (existing.length > 0 && existing[0]!.values.length > 0) {
-    res.status(409).json({ error: "Email already in use" });
+    res.status(409).json({ error: "This email is already registered" });
     return;
   }
 
