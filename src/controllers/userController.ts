@@ -47,3 +47,22 @@ export function createUser(req: Request, res: Response): void {
     phone: row[3],
   });
 }
+
+export function listUsers(_req: Request, res: Response): void {
+  const db = getDatabase();
+  const result = db.exec(`SELECT id, name, email, phone FROM users`);
+
+  if (result.length === 0) {
+    res.json([]);
+    return;
+  }
+
+  const users = result[0]!.values.map((row: SqlValue[]) => ({
+    id: row[0],
+    name: row[1],
+    email: row[2],
+    phone: row[3],
+  }));
+
+  res.json(users);
+}
